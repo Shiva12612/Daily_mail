@@ -2,7 +2,7 @@ name: Daily Mail Workflow
 
 on:
   schedule:
-    - cron: "0 3 * * *"   # रोज़ 8:30 AM IST (3 AM UTC)
+    - cron: "0 3 * * *"   # रोज़ 8:30 AM IST
   workflow_dispatch:
 
 jobs:
@@ -17,8 +17,25 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y msmtp ca-certificates
 
-      - name: Make script executable
-        run: chmod +x shiva_daily.sh
+      - name: Setup msmtp config
+        run: |
+          cat <<EOF > ~/.msmtprc
+          defaults
+          auth           on
+          tls            on
+          tls_trust_file /etc/ssl/certs/ca-certificates.crt
+          account        gmail
+          host           smtp.gmail.com
+          port           587
+          from           $GMAIL_USER
+          user           $GMAIL_USER
+          password       $GMAIL_PASS
+          account default : gmail
+          EOF
+          chmod 600 ~/.msmtprc
+        env:
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_PASS: ${{ secrets.GMAIL_PASS }}
 
-      - name: Run script
+      - name: Run Shiva Daily Script
         run: ./shiva_daily.sh

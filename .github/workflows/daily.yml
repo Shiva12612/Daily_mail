@@ -1,0 +1,17 @@
+name: Daily Mail Script
+
+on:
+    schedule:
+          - cron: "0 3 * * *"   # रोज़ सुबह 8:30 AM IST (क्योंकि 3 AM UTC = 8:30 AM IST)
+              workflow_dispatch:       # Manual run button भी मिलेगा
+
+jobs:
+     run-script:
+       runs-on: ubuntu-latest
+       steps:
+           - name: Checkout repo
+             uses: actions/checkout@v2
+
+           - name: Run script
+             run: bash shiva_daily.sh
+

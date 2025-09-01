@@ -1,20 +1,24 @@
-name: Daily Mail Test Workflow
+name: Daily Mail Workflow
 
 on:
   schedule:
-    - cron: "0 3 * * *"   # रोज़ सुबह 8:30 AM IST (3 AM UTC)
-  workflow_dispatch:       # Manual run option (button मिलेगा)
+    - cron: "0 3 * * *"   # रोज़ 8:30 AM IST (3 AM UTC)
+  workflow_dispatch:
 
 jobs:
-  test-job:
+  send-mail:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Install msmtp
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y msmtp ca-certificates
+
       - name: Make script executable
         run: chmod +x shiva_daily.sh
 
-      - name: Run shiva_daily.sh
+      - name: Run script
         run: ./shiva_daily.sh
-

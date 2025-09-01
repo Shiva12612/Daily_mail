@@ -16,5 +16,5 @@ jobs:
         run: chmod +x shiva_daily.sh
 
       - name: Run shiva_daily.sh
-        run: ./shiva_dailyl.sh
+        run: ./shiva_daily.sh
 

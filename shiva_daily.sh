@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Receivers (BCC list)
-receivers="sm4524457@gmail.com,2021wa15403@wilp.bits-pilani.ac.in,2021wa15989@wilp.bits-pilani.ac.in,2021wa15893@wilp.bits-pilani.ac.in,chhamatiwari08@gmail.com,sanyashukla7642@gmail.com"
+receivers="sm4524457@gmail.com,2021wa15403@wilp.bits-pilani.ac.in"
 
 ## Random Thought list
 thoughts=(
